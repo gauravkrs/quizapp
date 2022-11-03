@@ -18,13 +18,13 @@ userRouter.post("/signup", async (req, res) => {
 });
 
 userRouter.post("/login", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, password } = req.body;
   const users = await user.findOne({ username });
   if (username === users.username && password === users.password) {
     const token = jwt.sign(
       { name: users.name, username: users.username },
       "quiz4568",
-      { expiresIn: "30mins" }
+      { expiresIn: "2h" }
     );
     res.status(200).send({ message: "login successful", token });
   }
